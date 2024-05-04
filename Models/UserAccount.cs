@@ -10,6 +10,12 @@ namespace _334_group_project_web_api.Models
         AdolescentUser,
         AdultUser
     }
+
+    public class Alert
+    {
+        public string AlertType { get; set; } // Warning, Error, Success, Internal
+        public string AlertText { get; set; }
+    }
     public class UserAccount
     {
         [BsonId]
@@ -29,6 +35,7 @@ namespace _334_group_project_web_api.Models
         public string? postalCode { get; set; }
         public string? country { get; set; }
         public List<string> prderIds { get; set; } = new List<string>();
+        public List<Alert> alerts { get; set; } = new List<Alert>();
 
     }
 }
