@@ -1,4 +1,7 @@
-﻿namespace _334_group_project_web_api.Models
+﻿using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
+
+namespace _334_group_project_web_api.Models
 {
     public enum UserAccountType
     {
@@ -7,11 +10,12 @@
         AdolescentUser,
         AdultUser
     }
-
     public class UserAccount
     {
-        public string Id { get; set; } = Guid.NewGuid().ToString();
-        public string? givenName { get; set; } 
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
+        public string? givenName { get; set; }
         public string? surname { get; set; }
         public string? displayName { get; set; }
         public string? Email { get; set; }
@@ -24,7 +28,6 @@
         public string? state { get; set; }
         public string? postalCode { get; set; }
         public string? country { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public DateTime LastUpdatedAt { get; set; }
+
     }
 }

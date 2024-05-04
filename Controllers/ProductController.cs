@@ -1,6 +1,77 @@
-﻿namespace _334_group_project_web_api.Controllers
+﻿using _334_group_project_web_api.Helpers;
+using _334_group_project_web_api.Models;
+using Azure.Core;
+using Azure;
+using Microsoft.AspNetCore.Mvc;
+
+namespace _334_group_project_web_api.Controllers
 {
-    public class ProductController
+    [Route("api/[controller]/[action]")]
+    [ApiController]
+    public class ProductController : ControllerBase
     {
+        private readonly ProductService _productService;
+
+        public ProductController(ProductService productService)
+        {
+            _productService = productService;
+        }
+
+        [HttpGet]
+        public async Task<List<Product>> Get() =>
+        await _productService.GetAsync();
+
+        [HttpGet("{id:length(24)}")]
+        public async Task<ActionResult<Product>> Get(string id)
+        {
+            var product = await _productService.GetAsync(id);
+
+            if (product is null)
+            {
+                return NotFound();
+            }
+
+            return product;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(Product newProduct)
+        {
+            await _productService.CreateAsync(newProduct);
+
+            return CreatedAtAction(nameof(Get), new { id = newProduct.Id }, newProduct);
+        }
+
+        [HttpPut("{id:length(24)}")]
+        public async Task<IActionResult> Update(string id, Product updateProduct)
+        {
+            var product = await _productService.GetAsync(id);
+
+            if (product is null)
+            {
+                return NotFound();
+            }
+
+            updateProduct.Id = product.Id;
+
+            await _productService.UpdateAsync(id, updateProduct);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id:length(24)}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var product = await _productService.GetAsync(id);
+
+            if (product is null)
+            {
+                return NotFound();
+            }
+
+            await _productService.RemoveAsync(id);
+
+            return NoContent();
+        }
     }
 }
