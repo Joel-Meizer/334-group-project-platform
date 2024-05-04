@@ -4,8 +4,9 @@ using _334_group_project_web_api.Models;
 using MongoDB.Bson;
 using System.Text;
 using Newtonsoft.Json;
-using System;
 using RestSharp;
+using _334_group_project_web_api.Helpers;
+using Microsoft.Graph;
 
 namespace _334_group_project_web_api.Controllers
 {
@@ -13,6 +14,15 @@ namespace _334_group_project_web_api.Controllers
     [ApiController]
     public class UserAccountController : ControllerBase
     {
+        private readonly UserAccountService _userAccountService;
+        private readonly JwtService _jwtService;
+
+        public UserAccountController(UserAccountService userAccountService, JwtService jwtService)
+        {
+            _userAccountService = userAccountService;
+            _jwtService = jwtService;
+        }
+
         [HttpPost]
         public async Task<IActionResult> GetAccessToken(string username, string password)
         {
@@ -53,56 +63,133 @@ namespace _334_group_project_web_api.Controllers
             }
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Get(string userID)
+        public class UserCredentials
         {
-            string apiKey = Request.Cookies["APIKey"];
-
-            var client = new RestClient("https://ap-southeast-2.aws.data.mongodb-api.com/app/data-vtlhy/endpoint/data/v1/action/findOne");
-            var request = new RestRequest();
-            request.AddHeader("Content-Type", "application/json");
-            request.AddHeader("Access-Control-Request-Headers", "*");
-            request.AddHeader("Authorization", $"Bearer {apiKey}");
-            var body = @"{" + "" + @" ""collection"":""UserAccounts""," + "" + @" ""database"":""3340group-project""," + "" + @" ""dataSource"":""334Cluster""," + "" +@" ""projection"":{""friendlyId"": " + "\"" + userID + "\"" + "}" + "" +@"" + "" +@"}";
-            request.AddStringBody(body, DataFormat.Json);
-            RestResponse response = await client.PostAsync(request);
-            return Ok(response.Content);
+            public string email { get; set; }
+            public string password { get; set; }
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(UserAccount newAccount, string accessToken)
+        public async Task<ActionResult<UserAccount>> Validate([FromBody] UserCredentials credentials)
         {
-            using (HttpClient client = new HttpClient())
+            var hashedPassword = HashPassword(credentials.password);
+            var user = await _userAccountService.GetAsyncByCreds(credentials.email, hashedPassword);
+
+            if (user is null)
             {
-                client.DefaultRequestHeaders.Add("Content-Type", "application/json");
-                client.DefaultRequestHeaders.Add("Access-Control-Request-Headers", "*");
-                client.DefaultRequestHeaders.Add("api-key", "IQ329isRYRS6d0YyVdtq5O8Y8eaiH2UYT8nHRVohamgXUBxZ7PnRgV5SJFviUCB4");
-
-                var jsonBody = new BsonDocument
+                var errorResult = new
                 {
-                    { "collection", "UserAccounts" },
-                    { "database", "3340group-project" },
-                    { "dataSource", "334Cluster" },
-                    { "projection", new BsonDocument("_id", 1) }
-                }.ToString();
+                    Code = 403,
+                    Message = "Credentials are invalid"
+                };
 
-                var content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
-
-                string url = "https://ap-southeast-2.aws.data.mongodb-api.com/app/data-vtlhy/endpoint/data/v1/action/findOne";
-
-                HttpResponseMessage response = await client.PostAsync(url, content);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseContent = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine("Response: " + responseContent);
-                }
-                else
-                {
-                    Console.WriteLine("Request failed with status code: " + response.StatusCode);
-                }
+                return Unauthorized(errorResult);
             }
-            return Ok(newAccount);
+            else
+            {
+                var jwt = _jwtService.Generate(user.Id);
+
+                Response.Cookies.Append("ecommerce_centre_jwt", jwt, new CookieOptions
+                {
+                    HttpOnly = true
+                });
+
+                var successResult = new
+                {
+                    Code = 200
+                };
+
+                return Ok(successResult);
+            }
+        }
+
+        [HttpGet]
+        public async Task<List<UserAccount>> Get() =>
+        await _userAccountService.GetAsync();
+
+        [HttpGet("{id:length(24)}")]
+        public async Task<ActionResult<UserAccount>> Get(string id)
+        {
+            var user = await _userAccountService.GetAsync(id);
+
+            if (user is null)
+            {
+                return NotFound();
+            }
+
+            return user;
+        }
+
+        [HttpGet("GetById")]
+        public async Task<ActionResult<UserAccount>> GetById()
+        {
+            if (Request.Cookies["ecommerce_centre_jwt"] is not null)
+            {
+                var errorResult = new
+                {
+                    Code = 403,
+                    Message = "Credentials are invalid"
+                };
+
+                return Unauthorized(errorResult);
+            }
+            else
+            {
+                //var id = _jwtService.Decode(Request.Cookies["ecommerce_centre_jwt"]);
+                var id = "662a5b2aa1235c2773022409";
+                var user = await _userAccountService.GetAsync(id);
+
+                if (user is null)
+                {
+                    return NotFound();
+                }
+
+                var returnedUser = await _userAccountService.GetAsync(id);
+
+                return Ok(returnedUser);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(UserAccount newUser)
+        {
+            newUser.Password = HashPassword(newUser.Password);
+
+            await _userAccountService.CreateAsync(newUser);
+
+            return CreatedAtAction(nameof(Get), new { id = newUser.Id }, newUser);
+        }
+
+        [HttpPut("{id:length(24)}")]
+        public async Task<IActionResult> Update(string id, UserAccount updatedUser)
+        {
+            var user = await _userAccountService.GetAsync(id);
+
+            if (user is null)
+            {
+                return NotFound();
+            }
+
+            updatedUser.Id = user.Id;
+
+            await _userAccountService.UpdateAsync(id, updatedUser);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id:length(24)}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var user = await _userAccountService.GetAsync(id);
+
+            if (user is null)
+            {
+                return NotFound();
+            }
+
+            await _userAccountService.RemoveAsync(id);
+
+            return NoContent();
         }
 
         private string HashPassword(string password)

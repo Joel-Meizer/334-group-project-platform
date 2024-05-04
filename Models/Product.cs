@@ -1,4 +1,7 @@
-﻿namespace _334_group_project_web_api.Models
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
+
+namespace _334_group_project_web_api.Models
 {
     public enum ProductType
     {
@@ -22,7 +25,9 @@
 
     public class Product
     {
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
         public ProductType? Category { get; set; }

@@ -1,11 +1,13 @@
-using System;
-using System.Collections.Generic;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
 
 namespace _334_group_project_web_api.Models
 {
     public class Grocer
     {
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
         public string Name { get; set; }
         public string ContactPerson { get; set; }
         public string Email { get; set; }

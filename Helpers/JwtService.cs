@@ -6,7 +6,7 @@ namespace _334_group_project_web_api.Helpers
 {
     public class JwtService
     {
-        private string secureKey = "This is a super secret key";
+        private string secureKey = "1970f389-d591-4e67-83dc-a8ab83abfb4a-68c7cc59-aea5-4595-9089-6be90f3e911f";
         public string Generate(string id)
         {
             var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secureKey));
