@@ -36,7 +36,6 @@ namespace _334_group_project_web_api.Models
         public double? WeightOrQuantity { get; set; }
         public DateTime? ExpirationDate { get; set; }
         public string? NutritionalInformation { get; set; }
-        public string? Ingredients { get; set; }
         public string? CountryOfOrigin { get; set; }
         public string? Barcode { get; set; }
         public string? ImageUrl { get; set; }

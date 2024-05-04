@@ -28,6 +28,7 @@ namespace _334_group_project_web_api.Models
         public string? state { get; set; }
         public string? postalCode { get; set; }
         public string? country { get; set; }
+        public List<string> prderIds { get; set; } = new List<string>();
 
     }
 }

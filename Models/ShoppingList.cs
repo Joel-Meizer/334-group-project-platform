@@ -17,7 +17,9 @@ namespace _334_group_project_web_api.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         public string UserId { get; set; }
-        public List<string> ProductIds { get; set; } = new List<string>(); // List of Product Ids
+        public List<Product> IndividualProducts { get; set; } = new List<Product>();
+        public List<Meal> IndividualMeals { get; set; } = new List<Meal>();
+        public List<MealPlan> IndividualMealPlans { get; set; } = new List<MealPlan>();
         public string DisplayName { get; set; }
         public ShoppingListStatus Status { get; set; } = ShoppingListStatus.Active;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

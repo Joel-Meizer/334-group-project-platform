@@ -25,12 +25,16 @@ builder.Services.Configure<ProductDatabaseSettings>(
 builder.Services.Configure<ShoppingListDatabaseSettings>(
     builder.Configuration.GetSection("Database"));
 
+builder.Services.Configure<MealDatabaseSettings>(
+    builder.Configuration.GetSection("Database"));
+
 builder.Services.AddSingleton<UserAccountService>();
 builder.Services.AddSingleton<ShoppingListService>();
 builder.Services.AddSingleton<ProductService>();
 builder.Services.AddSingleton<JwtService>();
 builder.Services.AddSingleton<GrocerService>();
 builder.Services.AddSingleton<MealPlanService>();
+builder.Services.AddSingleton<MealService>();
 builder.Services.AddSingleton<OrderService>();
 
 var app = builder.Build();
