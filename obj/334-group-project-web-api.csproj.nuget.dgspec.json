@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\joelm\\source\\repos\\334-group-project-web-api\\334-group-project-web-api.csproj": {}
+    "C:\\Users\\joelm\\Source\\Repos\\334-group-project-platform\\334-group-project-web-api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\joelm\\source\\repos\\334-group-project-web-api\\334-group-project-web-api.csproj": {
+    "C:\\Users\\joelm\\Source\\Repos\\334-group-project-platform\\334-group-project-web-api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\joelm\\source\\repos\\334-group-project-web-api\\334-group-project-web-api.csproj",
+        "projectUniqueName": "C:\\Users\\joelm\\Source\\Repos\\334-group-project-platform\\334-group-project-web-api.csproj",
         "projectName": "334-group-project-web-api",
-        "projectPath": "C:\\Users\\joelm\\source\\repos\\334-group-project-web-api\\334-group-project-web-api.csproj",
+        "projectPath": "C:\\Users\\joelm\\Source\\Repos\\334-group-project-platform\\334-group-project-web-api.csproj",
         "packagesPath": "C:\\Users\\joelm\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\joelm\\source\\repos\\334-group-project-web-api\\obj\\",
+        "outputPath": "C:\\Users\\joelm\\Source\\Repos\\334-group-project-platform\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\joelm\\AppData\\Roaming\\NuGet\\NuGet.Config",
