@@ -3,26 +3,6 @@ using MongoDB.Bson;
 
 namespace _334_group_project_web_api.Models
 {
-    public enum ProductType
-    {
-        Confectionary,
-        Deli,
-        ProteinMeat,
-        Cereal,
-        FrozenFoods,
-        HealthFoods,
-        BakeryItems,
-        DairyProducts,
-        Produce,
-        Beverages,
-        Snacks,
-        Condiments,
-        CannedGoods,
-        Pasta,
-        Sauces,
-        Spices
-    }
-
     public class Product
     {
         [BsonId]
@@ -30,7 +10,7 @@ namespace _334_group_project_web_api.Models
         public string Id { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
-        public ProductType? Category { get; set; }
+        public string? Category { get; set; }
         public double? Price { get; set; }
         public string? Manufacturer { get; set; }
         public double? WeightOrQuantity { get; set; }

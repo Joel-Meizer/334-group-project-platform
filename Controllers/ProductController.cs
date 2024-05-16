@@ -21,6 +21,19 @@ namespace _334_group_project_web_api.Controllers
         public async Task<List<Product>> Get() =>
         await _productService.GetAsync();
 
+
+        [HttpGet]
+        public async Task<List<String>> GetAllIDs()
+        {
+            List<Product> productList = await _productService.GetAsync();
+            List<String> productIDs = new List<String>();
+            foreach(Product product in productList)
+            {
+                productIDs.Add(product.Id);
+            }
+            return productIDs;
+        }
+
         [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<Product>> Get(string id)
         {
@@ -40,6 +53,23 @@ namespace _334_group_project_web_api.Controllers
             await _productService.CreateAsync(newProduct);
 
             return CreatedAtAction(nameof(Get), new { id = newProduct.Id }, newProduct);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> BulkPost([FromBody]List<Product> newProductList)
+        {
+            foreach(Product newProduct in newProductList)
+            {
+                try
+                {
+                    await _productService.CreateAsync(newProduct);
+                } catch (Exception ex) {
+                    Console.WriteLine(newProduct);
+                    Console.WriteLine(ex.ToString());
+                }
+            }
+
+            return Ok();
         }
 
         [HttpPut("{id:length(24)}")]

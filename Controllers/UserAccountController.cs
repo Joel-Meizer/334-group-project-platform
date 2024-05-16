@@ -89,13 +89,14 @@ namespace _334_group_project_web_api.Controllers
             {
                 var jwt = _jwtService.Generate(user.Id);
 
-                Response.Cookies.Append("ecommerce_centre_jwt", jwt, new CookieOptions
+                Response.Cookies.Append("334_group_token", jwt, new CookieOptions
                 {
                     HttpOnly = true
                 });
 
                 var successResult = new
                 {
+                    User = user,
                     Code = 200
                 };
 
@@ -136,7 +137,7 @@ namespace _334_group_project_web_api.Controllers
             else
             {
                 //var id = _jwtService.Decode(Request.Cookies["ecommerce_centre_jwt"]);
-                var id = "662a5b2aa1235c2773022409";
+                var id = "6645e7b34a5f82fec3f4b448";
                 var user = await _userAccountService.GetAsync(id);
 
                 if (user is null)
@@ -171,6 +172,7 @@ namespace _334_group_project_web_api.Controllers
             }
 
             updatedUser.Id = user.Id;
+            updatedUser.Password = user.Password;
 
             await _userAccountService.UpdateAsync(id, updatedUser);
 
