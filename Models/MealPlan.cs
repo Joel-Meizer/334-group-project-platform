@@ -13,5 +13,6 @@ namespace _334_group_project_web_api.Models
         public int price { get; set; }
         public List<Meal> Meals { get; set; } = new List<Meal>();
         public string GrocerId { get; set; }
+        public string imageUrl { get; set; }
     }
 }

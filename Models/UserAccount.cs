@@ -34,8 +34,9 @@ namespace _334_group_project_web_api.Models
         public string? state { get; set; }
         public string? postalCode { get; set; }
         public string? country { get; set; }
-        public List<string> prderIds { get; set; } = new List<string>();
+        public List<string> orderIds { get; set; } = new List<string>();
         public List<Alert> alerts { get; set; } = new List<Alert>();
+        public string? relatedShoppingListId { get; set; }
 
     }
 }

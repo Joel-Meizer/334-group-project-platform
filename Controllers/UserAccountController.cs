@@ -173,6 +173,8 @@ namespace _334_group_project_web_api.Controllers
 
             updatedUser.Id = user.Id;
             updatedUser.Password = user.Password;
+            updatedUser.alerts = user.alerts;
+            updatedUser.relatedShoppingListId = user.relatedShoppingListId;
 
             await _userAccountService.UpdateAsync(id, updatedUser);
 
