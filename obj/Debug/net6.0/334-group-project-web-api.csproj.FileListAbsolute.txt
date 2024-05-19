@@ -350,3 +350,17 @@ C:\Users\Brayden\Source\Repos\334-group-project-platform\obj\Debug\net6.0\refint
 C:\Users\Brayden\Source\Repos\334-group-project-platform\obj\Debug\net6.0\334-group-project-web-api.pdb
 C:\Users\Brayden\Source\Repos\334-group-project-platform\obj\Debug\net6.0\334-group-project-web-api.genruntimeconfig.cache
 C:\Users\Brayden\Source\Repos\334-group-project-platform\obj\Debug\net6.0\ref\334-group-project-web-api.dll
+C:\Users\Brayden\Source\Repos\334-group-project-platform\bin\Debug\net6.0\Microsoft.ApplicationInsights.dll
+C:\Users\Brayden\Source\Repos\334-group-project-platform\bin\Debug\net6.0\Microsoft.ApplicationInsights.AspNetCore.dll
+C:\Users\Brayden\Source\Repos\334-group-project-platform\bin\Debug\net6.0\Microsoft.AI.DependencyCollector.dll
+C:\Users\Brayden\Source\Repos\334-group-project-platform\bin\Debug\net6.0\Microsoft.AI.EventCounterCollector.dll
+C:\Users\Brayden\Source\Repos\334-group-project-platform\bin\Debug\net6.0\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\Brayden\Source\Repos\334-group-project-platform\bin\Debug\net6.0\Microsoft.AI.WindowsServer.dll
+C:\Users\Brayden\Source\Repos\334-group-project-platform\bin\Debug\net6.0\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\Brayden\Source\Repos\334-group-project-platform\bin\Debug\net6.0\Microsoft.Extensions.Logging.ApplicationInsights.dll
+C:\Users\Brayden\Source\Repos\334-group-project-platform\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+C:\Users\Brayden\Source\Repos\334-group-project-platform\bin\Debug\net6.0\System.Diagnostics.PerformanceCounter.dll
+C:\Users\Brayden\Source\Repos\334-group-project-platform\bin\Debug\net6.0\System.Security.Permissions.dll
+C:\Users\Brayden\Source\Repos\334-group-project-platform\bin\Debug\net6.0\System.Windows.Extensions.dll
+C:\Users\Brayden\Source\Repos\334-group-project-platform\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.0\System.Diagnostics.PerformanceCounter.dll
+C:\Users\Brayden\Source\Repos\334-group-project-platform\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll

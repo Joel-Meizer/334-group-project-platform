@@ -10,7 +10,7 @@ namespace _334_group_project_web_api.Models
         public string Id { get; set; }
 
         [BsonRepresentation(BsonType.ObjectId)]
-        public string AdminUserId { get; set; }
+        public string? AdminUserId { get; set; }
 
         [BsonRepresentation(BsonType.ObjectId)]
         public string? InventoryId { get; set; }

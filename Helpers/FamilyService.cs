@@ -1,5 +1,6 @@
 ﻿using _334_group_project_web_api.Models;
 using _334_group_project_web_api.DBSettings;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
@@ -22,9 +23,13 @@ namespace _334_group_project_web_api.Helpers
         public async Task CreateAsync(Family newFamily) =>
             await _FamilyCollection.InsertOneAsync(newFamily);
 
-        public async Task<Family> GetFamilyById(string familyId)
+        public async Task<Family?> GetFamilyById(string familyId) =>
+            await _FamilyCollection.Find(x => x.AdminUserId == familyId).FirstOrDefaultAsync();
+
+        public async Task<string> GetFamilyId(string adminId)
         {
-            return await _FamilyCollection.Find(x => x.Id == familyId).FirstOrDefaultAsync();
+           var family = await _FamilyCollection.Find(x => x.Id == adminId).FirstOrDefaultAsync();
+           return family.Id;
         }
 
         public async Task UpdateAsync(string familyId, Family updatedFamily) =>
