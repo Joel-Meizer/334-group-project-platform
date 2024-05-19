@@ -5,10 +5,10 @@ namespace _334_group_project_web_api.Models
 {
     public enum UserAccountType
     {
-        Administrator,
-        ChildUser,
-        AdolescentUser,
-        AdultUser
+        Administrator = 0,
+        ChildUser = 1,
+        AdolescentUser = 2,
+        AdultUser = 3
     }
 
     public class Alert
