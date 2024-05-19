@@ -31,8 +31,16 @@ public class UserAccountService
     public async Task<UserAccount?> GetAsync(string id) =>
         await _UserAccountCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
-    public async Task<UserAccount> CreateAsync(UserAccount userAccount)
+    public async Task CreateAsync(UserAccount userAccount)
     {
+
+        //Give user Admin if new User for new Family
+        if (userAccount.Type == null)
+        {
+            userAccount.Type = UserAccountType.Administrator;
+        }
+
+
         // Set default permissions based on user type
         switch (userAccount.Type)
         {
@@ -56,21 +64,24 @@ public class UserAccountService
                 break;
         }
 
+
+
+        await _UserAccountCollection.InsertOneAsync(userAccount);
+
         // If the user is an admin, create a new family and assign the FamilyId
         if (userAccount.Type == UserAccountType.Administrator)
         {
             var newFamily = new Family
             {
                 AdminUserId = userAccount.Id,
-                AdminUser = userAccount
             };
 
             await _familyService.CreateAsync(newFamily);
             userAccount.FamilyId = newFamily.Id;
+            await _familyService.UpdateAsync(newFamily.Id, newFamily);
         }
 
-        await _UserAccountCollection.InsertOneAsync(userAccount);
-        return userAccount;
+        await _UserAccountCollection.ReplaceOneAsync(x => x.Id == userAccount.Id, userAccount);
     }
 
 

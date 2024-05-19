@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("334-group-project-web-api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c6df5e8d9150ce587f85c4ced87436424ceeb363")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e4a28fbbac2cc852f18574ed34304bf0c2c8eb5f")]
 [assembly: System.Reflection.AssemblyProductAttribute("334-group-project-web-api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("334-group-project-web-api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

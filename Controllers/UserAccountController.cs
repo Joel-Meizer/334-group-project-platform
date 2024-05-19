@@ -90,13 +90,14 @@ namespace _334_group_project_web_api.Controllers
             {
                 var jwt = _jwtService.Generate(user.Id);
 
-                Response.Cookies.Append("ecommerce_centre_jwt", jwt, new CookieOptions
+                Response.Cookies.Append("334_group_token", jwt, new CookieOptions
                 {
                     HttpOnly = true
                 });
 
                 var successResult = new
                 {
+                    User = user,
                     Code = 200
                 };
 
@@ -161,6 +162,7 @@ namespace _334_group_project_web_api.Controllers
             return CreatedAtAction(nameof(Get), new { id = newUser.Id }, newUser);
         }
 
+        
         [HttpPost("families/{familyId}/members")]
         public async Task<IActionResult> AddFamilyMember(string familyId, [FromBody] UserAccount newMember)
         {
@@ -183,7 +185,8 @@ namespace _334_group_project_web_api.Controllers
             newMember.FamilyId = familyId;
 
             // Create the new user account
-            var createdMember = await _userAccountService.CreateAsync(newMember);
+            await _userAccountService.CreateAsync(newMember);
+            var createdMember = await _userAccountService.GetAsync(newMember.Id);
 
             // Add the new member to the family
             family.FamilyMembers.Add(createdMember);
@@ -191,6 +194,7 @@ namespace _334_group_project_web_api.Controllers
 
             return CreatedAtAction(nameof(Get), new { id = createdMember.Id }, createdMember);
         }
+        
 
         [HttpPut("{id:length(24)}")]
         public async Task<IActionResult> Update(string id, UserAccount updatedUser)

@@ -5,9 +5,9 @@ namespace _334_group_project_web_api.Models
 {
     public enum UserAccountType
     {
-        Administrator,
-        AdultUser,
-        ChildUser
+        Administrator = 0,
+        AdultUser = 1,
+        ChildUser = 2,
     }
     public class UserAccount
     {
