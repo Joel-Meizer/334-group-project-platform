@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using RestSharp;
 using _334_group_project_web_api.Helpers;
 using Microsoft.Graph;
+using _334_group_project_web_api.Services;
 
 namespace _334_group_project_web_api.Controllers
 {
@@ -17,6 +18,7 @@ namespace _334_group_project_web_api.Controllers
         private readonly UserAccountService _userAccountService;
         private readonly JwtService _jwtService;
         private readonly FamilyService _familyService;
+        private readonly InventoryService _inventoryService;
 
         public UserAccountController(UserAccountService userAccountService, JwtService jwtService)
         {
@@ -173,7 +175,7 @@ namespace _334_group_project_web_api.Controllers
             }
 
             // Get the admin user's ID from the request
-            var adminUserId = Request.Headers["AdminUserId"].FirstOrDefault();
+            var adminUserId = family.AdminUserId;
 
             // Ensure the provided admin user ID matches the family's admin user ID
             if (string.IsNullOrEmpty(adminUserId) || adminUserId != family.AdminUserId)

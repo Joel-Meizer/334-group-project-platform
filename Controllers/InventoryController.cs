@@ -1,6 +1,8 @@
 ﻿using _334_group_project_web_api.Models;
 using _334_group_project_web_api.Services;
+using AspNetCore;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace _334_group_project_web_api.Controllers
 {
@@ -34,14 +36,13 @@ namespace _334_group_project_web_api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateInventoryItem([FromBody] Inventory inventory)
+        public async Task CreateAsync(Inventory inventory)
         {
-            await _inventoryService.CreateInventoryItem(inventory);
-            return CreatedAtAction(nameof(GetInventoryItem), new { id = inventory.Id }, inventory);
+            await _inventoryService.CreateAsync(inventory);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateInventoryItem(string id, [FromBody] Inventory inventory)
+        public async Task<IActionResult> UpdateAsync(string id, [FromBody] Inventory inventory)
         {
             var existingInventoryItem = await _inventoryService.GetInventoryItem(id);
             if (existingInventoryItem == null)
@@ -49,12 +50,12 @@ namespace _334_group_project_web_api.Controllers
                 return NotFound();
             }
 
-            await _inventoryService.UpdateInventoryItem(id, inventory);
+            await _inventoryService.UpdateAsync(id, inventory);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteInventoryItem(string id)
+        public async Task<IActionResult> DeleteAsync(string id)
         {
             var existingInventoryItem = await _inventoryService.GetInventoryItem(id);
             if (existingInventoryItem == null)
@@ -62,7 +63,7 @@ namespace _334_group_project_web_api.Controllers
                 return NotFound();
             }
 
-            await _inventoryService.DeleteInventoryItem(id);
+            await _inventoryService.DeleteAsync(id);
             return NoContent();
         }
     }

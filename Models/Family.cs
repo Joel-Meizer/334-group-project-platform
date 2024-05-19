@@ -12,6 +12,9 @@ namespace _334_group_project_web_api.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string AdminUserId { get; set; }
 
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string? InventoryId { get; set; }
+
         public List<UserAccount> FamilyMembers { get; set; } = new List<UserAccount>();
 
     }

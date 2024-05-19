@@ -1,5 +1,6 @@
 ﻿using _334_group_project_web_api.DBSettings;
 using _334_group_project_web_api.Models;
+using _334_group_project_web_api.Services;
 using Microsoft.Extensions.Options;
 using Microsoft.Graph;
 using MongoDB.Driver;
@@ -10,8 +11,9 @@ public class UserAccountService
 {
     private readonly IMongoCollection<UserAccount> _UserAccountCollection;
     private readonly FamilyService _familyService;
+    private readonly InventoryService _inventoryService;
 
-    public UserAccountService(IOptions<UserAccountDatabaseSettings> userAccountDatabaseSettings, FamilyService familyService)
+    public UserAccountService(IOptions<UserAccountDatabaseSettings> userAccountDatabaseSettings, FamilyService familyService, InventoryService inventoryService)
     {
         var mongoClient = new MongoClient(
             userAccountDatabaseSettings.Value.ConnectionString);
@@ -23,6 +25,8 @@ public class UserAccountService
             userAccountDatabaseSettings.Value.UserAccountCollectionName);
 
         _familyService = familyService;
+
+        _inventoryService = inventoryService;
     }
 
     public async Task<List<UserAccount>> GetAsync() =>
@@ -76,8 +80,18 @@ public class UserAccountService
                 AdminUserId = userAccount.Id,
             };
 
-            await _familyService.CreateAsync(newFamily);
+
+
+            await _familyService.CreateAsync(newFamily);            
+            
+            var newInventory = new Inventory
+            {
+                familyId = newFamily.Id,
+            };
+
+            var invId = await _inventoryService.CreateAsync(newInventory);
             userAccount.FamilyId = newFamily.Id;
+            newFamily.InventoryId = invId;
             await _familyService.UpdateAsync(newFamily.Id, newFamily);
         }
 

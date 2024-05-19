@@ -45,6 +45,7 @@ builder.Services.AddSingleton<MealService>();
 builder.Services.AddSingleton<OrderService>();
 builder.Services.AddSingleton<InventoryService>();
 builder.Services.AddSingleton<FamilyService>();
+builder.Services.AddApplicationInsightsTelemetry();
 
 var app = builder.Build();
 
