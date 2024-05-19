@@ -11,11 +11,12 @@ namespace _334_group_project_web_api.Controllers
     public class AIController : ControllerBase
     {
         [HttpPost]
-        public async Task<IActionResult> GetAISpeech([FromBody] string message)
+        public async Task<IActionResult> GetAISpeech(string message)
         {
             using (HttpClient client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Add("Authorization", "Bearer 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");
+
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer");
 
                 var messages = new List<object>
                 {

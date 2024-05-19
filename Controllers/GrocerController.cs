@@ -40,6 +40,17 @@ namespace _334_group_project_web_api.Controllers
             return CreatedAtAction(nameof(Get), new { id = newGrocer.Id }, newGrocer);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> BulkPost(List<Grocer> newGrocerList)
+        {
+            foreach (Grocer newGrocer in newGrocerList)
+            {
+                await _grocerService.CreateAsync(newGrocer);
+            }
+
+            return Ok();
+        }
+
         [HttpPut("{id:length(24)}")]
         public async Task<IActionResult> Update(string id, Grocer updateGrocer)
         {
@@ -68,6 +79,21 @@ namespace _334_group_project_web_api.Controllers
             }
 
             await _grocerService.RemoveAsync(id);
+
+            return NoContent();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> BulkAssignProductsToGrocers(List<String> productIds)
+        {
+            List<Grocer> grocers = await _grocerService.GetAsync();
+
+            foreach(Grocer grocer in grocers)
+            {
+                Grocer updateGrocer = grocer;
+                updateGrocer.ProductIds = productIds;
+                await _grocerService.UpdateAsync(grocer.Id, updateGrocer);
+            }
 
             return NoContent();
         }
