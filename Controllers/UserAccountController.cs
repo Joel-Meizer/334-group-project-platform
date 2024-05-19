@@ -16,6 +16,7 @@ namespace _334_group_project_web_api.Controllers
     {
         private readonly UserAccountService _userAccountService;
         private readonly JwtService _jwtService;
+        private readonly FamilyService _familyService;
 
         public UserAccountController(UserAccountService userAccountService, JwtService jwtService)
         {
@@ -158,6 +159,37 @@ namespace _334_group_project_web_api.Controllers
             await _userAccountService.CreateAsync(newUser);
 
             return CreatedAtAction(nameof(Get), new { id = newUser.Id }, newUser);
+        }
+
+        [HttpPost("families/{familyId}/members")]
+        public async Task<IActionResult> AddFamilyMember(string familyId, [FromBody] UserAccount newMember)
+        {
+            var family = await _familyService.GetFamilyById(familyId);
+            if (family == null)
+            {
+                return NotFound();
+            }
+
+            // Get the admin user's ID from the request
+            var adminUserId = Request.Headers["AdminUserId"].FirstOrDefault();
+
+            // Ensure the provided admin user ID matches the family's admin user ID
+            if (string.IsNullOrEmpty(adminUserId) || adminUserId != family.AdminUserId)
+            {
+                return Unauthorized();
+            }
+
+            // Set the FamilyId for the new member
+            newMember.FamilyId = familyId;
+
+            // Create the new user account
+            var createdMember = await _userAccountService.CreateAsync(newMember);
+
+            // Add the new member to the family
+            family.FamilyMembers.Add(createdMember);
+            await _familyService.UpdateAsync(familyId, family);
+
+            return CreatedAtAction(nameof(Get), new { id = createdMember.Id }, createdMember);
         }
 
         [HttpPut("{id:length(24)}")]

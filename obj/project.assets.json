@@ -1107,7 +1107,7 @@
           }
         }
       },
-      "MongoDB.Bson/2.24.0": {
+      "MongoDB.Bson/2.25.0": {
         "type": "package",
         "dependencies": {
           "System.Memory": "4.5.5",
@@ -1124,12 +1124,12 @@
           }
         }
       },
-      "MongoDB.Driver/2.24.0": {
+      "MongoDB.Driver/2.25.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "2.0.0",
-          "MongoDB.Bson": "2.24.0",
-          "MongoDB.Driver.Core": "2.24.0",
+          "MongoDB.Bson": "2.25.0",
+          "MongoDB.Driver.Core": "2.25.0",
           "MongoDB.Libmongocrypt": "1.8.2"
         },
         "compile": {
@@ -1143,13 +1143,13 @@
           }
         }
       },
-      "MongoDB.Driver.Core/2.24.0": {
+      "MongoDB.Driver.Core/2.25.0": {
         "type": "package",
         "dependencies": {
           "AWSSDK.SecurityToken": "3.7.100.14",
           "DnsClient": "1.6.1",
           "Microsoft.Extensions.Logging.Abstractions": "2.0.0",
-          "MongoDB.Bson": "2.24.0",
+          "MongoDB.Bson": "2.25.0",
           "MongoDB.Libmongocrypt": "1.8.2",
           "SharpCompress": "0.30.1",
           "Snappier": "1.0.0",
@@ -3537,10 +3537,10 @@
         "version.txt"
       ]
     },
-    "MongoDB.Bson/2.24.0": {
-      "sha512": "n8CWaA4iTuoEQYv0+FSKNTX/hJozFQa5EgSILVNPhTGHcrbABHhpVrT1NwRRAAS6sUb8ZyhHmLPBa88LJemptA==",
+    "MongoDB.Bson/2.25.0": {
+      "sha512": "xQx/qtC2nu9oGiyNqAwfiDpUMweLi0nID677cyKykpwmj5AVMrnd//UwmcmuX95178DeY6rf7cjmA613TQXPiA==",
       "type": "package",
-      "path": "mongodb.bson/2.24.0",
+      "path": "mongodb.bson/2.25.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3551,15 +3551,15 @@
         "lib/netstandard2.0/MongoDB.Bson.xml",
         "lib/netstandard2.1/MongoDB.Bson.dll",
         "lib/netstandard2.1/MongoDB.Bson.xml",
-        "mongodb.bson.2.24.0.nupkg.sha512",
+        "mongodb.bson.2.25.0.nupkg.sha512",
         "mongodb.bson.nuspec",
         "packageIcon.png"
       ]
     },
-    "MongoDB.Driver/2.24.0": {
-      "sha512": "j1q11iMk3LN38ze6jgV1ATp+WKVVQbsGrhFkuOcHwRNtIk70TpLKjOD1Z3CCkyrzxCsUyhwk745tK2ASNOI4WA==",
+    "MongoDB.Driver/2.25.0": {
+      "sha512": "dMqnZTV6MuvoEI4yFtSvKJdAoN6NeyAEvG8aoxnrLIVd7bR84QxLgpsM1nhK17qkOcIx/IrpMIfrvp5iMnYGBg==",
       "type": "package",
-      "path": "mongodb.driver/2.24.0",
+      "path": "mongodb.driver/2.25.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3570,15 +3570,15 @@
         "lib/netstandard2.0/MongoDB.Driver.xml",
         "lib/netstandard2.1/MongoDB.Driver.dll",
         "lib/netstandard2.1/MongoDB.Driver.xml",
-        "mongodb.driver.2.24.0.nupkg.sha512",
+        "mongodb.driver.2.25.0.nupkg.sha512",
         "mongodb.driver.nuspec",
         "packageIcon.png"
       ]
     },
-    "MongoDB.Driver.Core/2.24.0": {
-      "sha512": "UW0yadpMPi9+MtLHy6onpol3D9tXMRg61P0ROnij+h35EOr0vt/nxvlPrDcUjl3SvttvpsEXQKxb2lQShBA1dA==",
+    "MongoDB.Driver.Core/2.25.0": {
+      "sha512": "oN4nLgO5HQEThTg/zqeoHqaO2+q64DBVb4r7BvhaFb0p0TM9jZKnCKvh1EA8d9E9swIz0CgvMrvL1mPyRCZzag==",
       "type": "package",
-      "path": "mongodb.driver.core/2.24.0",
+      "path": "mongodb.driver.core/2.25.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3590,7 +3590,7 @@
         "lib/netstandard2.0/MongoDB.Driver.Core.xml",
         "lib/netstandard2.1/MongoDB.Driver.Core.dll",
         "lib/netstandard2.1/MongoDB.Driver.Core.xml",
-        "mongodb.driver.core.2.24.0.nupkg.sha512",
+        "mongodb.driver.core.2.25.0.nupkg.sha512",
         "mongodb.driver.core.nuspec",
         "packageIcon.png"
       ]
@@ -5381,7 +5381,7 @@
       "Microsoft.Identity.Web >= 2.15.3",
       "Microsoft.Identity.Web.MicrosoftGraph >= 2.13.1",
       "Microsoft.Identity.Web.UI >= 2.13.1",
-      "MongoDB.Driver >= 2.24.0",
+      "MongoDB.Driver >= 2.25.0",
       "Newtonsoft.Json >= 13.0.3",
       "Pomelo.EntityFrameworkCore.MySql >= 7.0.0",
       "RestSharp >= 110.2.0",
@@ -5391,19 +5391,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\joelm\\.nuget\\packages\\": {}
+    "C:\\Users\\Brayden\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\joelm\\Source\\Repos\\334-group-project-platform\\334-group-project-web-api.csproj",
+      "projectUniqueName": "C:\\Users\\Brayden\\Source\\Repos\\334-group-project-platform\\334-group-project-web-api.csproj",
       "projectName": "334-group-project-web-api",
-      "projectPath": "C:\\Users\\joelm\\Source\\Repos\\334-group-project-platform\\334-group-project-web-api.csproj",
-      "packagesPath": "C:\\Users\\joelm\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\joelm\\Source\\Repos\\334-group-project-platform\\obj\\",
+      "projectPath": "C:\\Users\\Brayden\\Source\\Repos\\334-group-project-platform\\334-group-project-web-api.csproj",
+      "packagesPath": "C:\\Users\\Brayden\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Brayden\\Source\\Repos\\334-group-project-platform\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\joelm\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Brayden\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5411,7 +5411,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -5424,6 +5423,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -5464,7 +5468,7 @@
           },
           "MongoDB.Driver": {
             "target": "Package",
-            "version": "[2.24.0, )"
+            "version": "[2.25.0, )"
           },
           "Newtonsoft.Json": {
             "target": "Package",
@@ -5502,24 +5506,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[6.0.20, 6.0.20]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[6.0.20, 6.0.20]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[6.0.20, 6.0.20]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[6.0.20, 6.0.20]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -5528,7 +5514,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205\\RuntimeIdentifierGraph.json"
       }
     }
   },

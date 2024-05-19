@@ -1,5 +1,6 @@
 using _334_group_project_web_api.DBSettings;
 using _334_group_project_web_api.Helpers;
+using _334_group_project_web_api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,12 @@ builder.Services.Configure<ShoppingListDatabaseSettings>(
 builder.Services.Configure<MealDatabaseSettings>(
     builder.Configuration.GetSection("Database"));
 
+builder.Services.Configure<InventoryDatabaseSettings>(
+    builder.Configuration.GetSection("Database"));
+
+builder.Services.Configure<FamilyDatabaseSettings>(
+    builder.Configuration.GetSection("Database"));
+
 builder.Services.AddSingleton<UserAccountService>();
 builder.Services.AddSingleton<ShoppingListService>();
 builder.Services.AddSingleton<ProductService>();
@@ -36,6 +43,8 @@ builder.Services.AddSingleton<GrocerService>();
 builder.Services.AddSingleton<MealPlanService>();
 builder.Services.AddSingleton<MealService>();
 builder.Services.AddSingleton<OrderService>();
+builder.Services.AddSingleton<InventoryService>();
+builder.Services.AddSingleton<FamilyService>();
 
 var app = builder.Build();
 
