@@ -15,6 +15,6 @@ namespace _334_group_project_web_api.Models
         public string Recipe { get; set; }
         public List<Product> Ingredients { get; set; } = new List<Product>();
         public string relatedGrocerId { get; set; }
-
+        public string imageUrl { get; set; }
     }
 }
