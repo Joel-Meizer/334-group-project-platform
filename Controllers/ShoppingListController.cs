@@ -1,6 +1,7 @@
 ﻿using _334_group_project_web_api.Helpers;
 using _334_group_project_web_api.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections;
 
 namespace _334_group_project_web_api.Controllers
 {
@@ -68,6 +69,109 @@ namespace _334_group_project_web_api.Controllers
             }
 
             await _shoppingListService.RemoveAsync(id);
+
+            return NoContent();
+        }
+
+
+        [HttpDelete("{id:length(24)}")]
+        public async Task<IActionResult> DeleteItemFromList(string id, string listName, string itemId)
+        {
+            var shoppingList = await _shoppingListService.GetAsync(id);
+
+            if (shoppingList is null)
+            {
+                return NotFound();
+            }
+
+            IList targetList = listName switch
+            {
+                "individualProducts" => shoppingList.IndividualProducts,
+                "individualMeals" => shoppingList.IndividualMeals,
+                "individualMealPlans" => shoppingList.IndividualMealPlans,
+                _ => null
+            };
+
+            if (targetList == null)
+            {
+                return BadRequest("Invalid list name");
+            }
+
+            object itemToRemove = null;
+            foreach (var item in targetList)
+            {
+                var itemIdProperty = item.GetType().GetProperty("Id");
+                if (itemIdProperty != null && itemIdProperty.GetValue(item)?.ToString() == itemId)
+                {
+                    itemToRemove = item;
+                    break;
+                }
+            }
+
+            if (itemToRemove != null)
+            {
+                targetList.Remove(itemToRemove);
+            }
+            else
+            {
+                return NotFound("Item not found");
+            }
+
+            // Save the updated shopping list
+            await _shoppingListService.UpdateAsync(id, shoppingList);
+
+            return NoContent();
+        }
+
+        public class AddItemBody
+        {
+            public Product? Product { get; set; }
+            public Meal? Meal { get; set; }
+            public MealPlan? MealPlan { get; set; }
+        }
+
+        [HttpPut("{id:length(24)}")]
+        public async Task<IActionResult> AddItemToList(string id, string listName, AddItemBody itemsToAdd)
+        {
+            var shoppingList = await _shoppingListService.GetAsync(id);
+
+            if (shoppingList is null)
+            {
+                return NotFound();
+            }
+
+            IList targetList = listName switch
+            {
+                "individualProducts" => shoppingList.IndividualProducts,
+                "individualMeals" => shoppingList.IndividualMeals,
+                "individualMealPlans" => shoppingList.IndividualMealPlans,
+                _ => null
+            };
+
+            if (targetList == null)
+            {
+                return BadRequest("Invalid list name");
+            }
+
+            if (itemsToAdd.Product != null)
+            {
+                targetList.Add(itemsToAdd.Product);
+            }
+            else if (itemsToAdd.Meal != null)
+            {
+                targetList.Add(itemsToAdd.Meal);
+            }
+            else if (itemsToAdd.MealPlan != null)
+            {
+                targetList.Add(itemsToAdd.MealPlan);
+            }
+            else
+            {
+                return NotFound("Item not found");
+            }
+
+            // Save the updated shopping list
+            await _shoppingListService.UpdateAsync(id, shoppingList);
 
             return NoContent();
         }
