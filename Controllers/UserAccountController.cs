@@ -174,6 +174,8 @@ namespace _334_group_project_web_api.Controllers
             updatedUser.Id = user.Id;
             updatedUser.Password = user.Password;
             updatedUser.alerts = user.alerts;
+            updatedUser.type = user.type;
+            updatedUser.orderIds = user.orderIds;
             updatedUser.relatedShoppingListId = user.relatedShoppingListId;
 
             await _userAccountService.UpdateAsync(id, updatedUser);
@@ -192,6 +194,24 @@ namespace _334_group_project_web_api.Controllers
             }
 
             await _userAccountService.RemoveAsync(id);
+
+            return NoContent();
+        }
+
+        [HttpPut("{id:length(24)}")]
+        public async Task<IActionResult> UpdateOrderIDs(string id, string orderId)
+        {
+            var user = await _userAccountService.GetAsync(id);
+
+            if (user is null)
+            {
+                return NotFound();
+            }
+
+            UserAccount updatedUser = user;
+            updatedUser.orderIds.Add(orderId);
+
+            await _userAccountService.UpdateAsync(id, updatedUser);
 
             return NoContent();
         }
